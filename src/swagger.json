@@ -918,16 +918,16 @@
                 }
             },
             "delete": {
-                "summary": "Exclusão de endereço",
-                "tags": ["Endereços"],
+                "summary": "Exclusão de estado",
+                "tags": ["Estados"],
                 "parameters": {
                     "in": "path",
-                    "name": "id_endereco",
+                    "name": "id_estado",
                     "required": true,
                     "schema": {
                         "type": "number"
                     },
-                    "description": "ID do endereço que será excluído"
+                    "description": "ID do estado que será excluído"
                 },
                 "responses": {
                     "200": {
@@ -936,7 +936,7 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "$ref": "#/components/schemas/Enderecos"
+                                    "$ref": "#/components/schemas/Estados"
                                 }
                             }
                         }
