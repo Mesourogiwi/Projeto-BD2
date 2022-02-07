@@ -1,0 +1,1383 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Bulls Shop API",
+        "description": "API do e-commerce Bulls Shop, projeto de BD2",
+        "version": "1.0.0"
+    },
+    "apis": [
+        "./src/server.ts"
+    ],
+    "servers": [
+        {
+            "url": "https://projeto-bd2.herokuapp.com",
+            "description": "Produção"
+        },
+        {
+            "url": "http://localhost:3000/",
+            "description": "local"
+        }
+    ],
+    "paths": {
+        "/administradores": {
+            "post": {
+                "summary": "Cadastro de administradores",
+                "tags": ["Administradores"],
+                "requestBody": {
+                    "description": "Corpo da requisição",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Administrador"
+                            },
+                            "examples": {
+                                "administrador": {
+                                    "value": {
+                                        "nome": "João da Silva",
+                                        "email": "joaodasilva@gmail.com",
+                                        "senha": "123456"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Esse email já está cadastrado!"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Administrador"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Listagem de administradores",
+                "tags": ["Administradores"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Administrador"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/administradores/{id_administrador}": {
+            "put": {
+                "summary": "Edição de administradores",
+                "tags": ["Administradores"],
+                "parameters": {
+                    "in": "path",
+                    "name": "id_administrador",
+                    "required": true,
+                    "schema": {
+                        "type": "number"
+                    },
+                    "description": "ID do administrador que será editado"
+                },
+                "requestBody": {
+                    "description": "Corpo da requisição",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Administrador"
+                            },
+                            "examples": {
+                                "administrador": {
+                                    "value": {
+                                        "nome": "João da Silva",
+                                        "email": "joaodasilva@gmail.com",
+                                        "senha": "123456"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Administrador"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Exclusão de administradores",
+                "tags": ["Administradores"],
+                "parameters": {
+                    "in": "path",
+                    "name": "id_administrador",
+                    "required": true,
+                    "schema": {
+                        "type": "number"
+                    },
+                    "description": "ID do administrador que será excluído"
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Administrador"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/cidades": {
+            "post": {
+                "summary": "Cadastro de cidades",
+                "tags": ["Cidades"],
+                "requestBody": {
+                    "description": "Corpo da requisição",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cidades"
+                            },
+                            "examples": {
+                                "cidade": {
+                                    "value": {
+                                        "cidade": "cidade",
+                                        "estado": 1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Essa cidade já existe!"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Cidades"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Listagem de cidades",
+                "tags": ["Cidades"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Cidades"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/cidades/{id_cidade}": {
+            "put": {
+                "summary": "Edição de cidades",
+                "tags": ["Cidades"],
+                "parameters": {
+                    "in": "path",
+                    "name": "id_cidade",
+                    "required": true,
+                    "schema": {
+                        "type": "number"
+                    },
+                    "description": "ID da cidade que será editada"
+                },
+                "requestBody": {
+                    "description": "Corpo da requisição",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cidades"
+                            },
+                            "examples": {
+                                "cidade": {
+                                    "value": {
+                                        "cidade": "cidade nova",
+                                        "estado": 2
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Cidades"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Exclusão de cidade",
+                "tags": ["Cidades"],
+                "parameters": {
+                    "in": "path",
+                    "name": "id_cidade",
+                    "required": true,
+                    "schema": {
+                        "type": "number"
+                    },
+                    "description": "ID da cidade que será excluída"
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Cidades"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/categorias": {
+            "post": {
+                "summary": "Cadastro de categorias",
+                "tags": ["Categorias"],
+                "requestBody": {
+                    "description": "Corpo da requisição",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Categorias"
+                            },
+                            "examples": {
+                                "categoria": {
+                                    "value": {
+                                        "nome": "Tênis"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Essa categoria já existe!"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Categorias"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Listagem de categorias",
+                "tags": ["Categorias"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Categorias"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/categorias/{id_categoria}": {
+            "put": {
+                "summary": "Edição de categorias",
+                "tags": ["Categorias"],
+                "parameters": {
+                    "in": "path",
+                    "name": "id_categoria",
+                    "required": true,
+                    "schema": {
+                        "type": "number"
+                    },
+                    "description": "ID da categoria que será editada"
+                },
+                "requestBody": {
+                    "description": "Corpo da requisição",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Categorias"
+                            },
+                            "examples": {
+                                "categoria": {
+                                    "value": {
+                                        "nome": "Calça"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Categorias"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Exclusão de categoria",
+                "tags": ["Categorias"],
+                "parameters": {
+                    "in": "path",
+                    "name": "id_categoria",
+                    "required": true,
+                    "schema": {
+                        "type": "number"
+                    },
+                    "description": "ID da categoria que será excluída"
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Categorias"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/clientes": {
+            "post": {
+                "summary": "Cadastro de clientes",
+                "tags": ["Clientes"],
+                "requestBody": {
+                    "description": "Corpo da requisição",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Clientes"
+                            },
+                            "examples": {
+                                "cliente": {
+                                    "value": {
+                                        "nome": "Valdinei",
+                                        "email": "valdinei@gmail.com",
+                                        "senha": "123456",
+                                        "cpf": "12345678900",
+                                        "endereco": 1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Esse email/cpf já está cadastrado!"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Clientes"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Listagem de clientes",
+                "tags": ["Clientes"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Clientes"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/clientes/{id_cliente}": {
+            "put": {
+                "summary": "Edição de cliente",
+                "tags": ["Clientes"],
+                "parameters": {
+                    "in": "path",
+                    "name": "id_cliente",
+                    "required": true,
+                    "schema": {
+                        "type": "number"
+                    },
+                    "description": "ID do cliente que será editado"
+                },
+                "requestBody": {
+                    "description": "Corpo da requisição",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Clientes"
+                            },
+                            "examples": {
+                                "cliente": {
+                                    "value": {
+                                        "nome": "Valdema",
+                                        "email": "valdemar@gmail.com",
+                                        "senha": "123456",
+                                        "cpf": "12345678900",
+                                        "endereco": 1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Clientes"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Exclusão de cliente",
+                "tags": ["Clientes"],
+                "parameters": {
+                    "in": "path",
+                    "name": "id_cliente",
+                    "required": true,
+                    "schema": {
+                        "type": "number"
+                    },
+                    "description": "ID do cliente que será excluído"
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Clientes"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/compras": {
+            "post": {
+                "summary": "Cadastro de compra",
+                "tags": ["Compras"],
+                "requestBody": {
+                    "description": "Corpo da requisição",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Compras"
+                            },
+                            "examples": {
+                                "compra": {
+                                    "value": {
+                                        "cliente": 1,
+                                        "total": 500
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Compras"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Listagem de compras",
+                "tags": ["Compras"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Compras"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/compras/{id_compra}": {
+            "put": {
+                "summary": "Edição de compras",
+                "tags": ["Compras"],
+                "parameters": {
+                    "in": "path",
+                    "name": "id_compra",
+                    "required": true,
+                    "schema": {
+                        "type": "number"
+                    },
+                    "description": "ID da compra que será editada"
+                },
+                "requestBody": {
+                    "description": "Corpo da requisição",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Compras"
+                            },
+                            "examples": {
+                                "compra": {
+                                    "value": {
+                                        "cliente": 2,
+                                        "total": 800
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Compras"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Exclusão de compra",
+                "tags": ["Compras"],
+                "parameters": {
+                    "in": "path",
+                    "name": "id_compra",
+                    "required": true,
+                    "schema": {
+                        "type": "number"
+                    },
+                    "description": "ID da compra que será excluída"
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Compras"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/enderecos": {
+            "post": {
+                "summary": "Cadastro de endereço",
+                "tags": ["Endereços"],
+                "requestBody": {
+                    "description": "Corpo da requisição",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Enderecos"
+                            },
+                            "examples": {
+                                "endereco": {
+                                    "value": {
+                                        "rua": "rua",
+                                        "bairro": "bairro",
+                                        "numero": "123",
+                                        "cidade": 1,
+                                        "estado": 1,
+                                        "CEP": "12345678"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Enderecos"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Listagem de endereços",
+                "tags": ["Endereços"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Enderecos"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/enderecos/{id_endereco}": {
+            "put": {
+                "summary": "Edição de endereços",
+                "tags": ["Endereços"],
+                "parameters": {
+                    "in": "path",
+                    "name": "id_endereco",
+                    "required": true,
+                    "schema": {
+                        "type": "number"
+                    },
+                    "description": "ID do endereço que será editado"
+                },
+                "requestBody": {
+                    "description": "Corpo da requisição",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Enderecos"
+                            },
+                            "examples": {
+                                "endereco": {
+                                    "value": {
+                                        "rua": "rua 2",
+                                        "bairro": "bairro 2",
+                                        "numero": "1234",
+                                        "cidade": 2,
+                                        "estado": 2,
+                                        "CEP": "87654321"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Enderecos"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Exclusão de endereço",
+                "tags": ["Endereços"],
+                "parameters": {
+                    "in": "path",
+                    "name": "id_endereco",
+                    "required": true,
+                    "schema": {
+                        "type": "number"
+                    },
+                    "description": "ID do endereço que será excluído"
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Enderecos"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/estados": {
+            "post": {
+                "summary": "Cadastro de estados",
+                "tags": ["Estados"],
+                "requestBody": {
+                    "description": "Corpo da requisição",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Estados"
+                            },
+                            "examples": {
+                                "estado": {
+                                    "value": {
+                                        "estado": "Santa Catarina",
+                                        "sigla": "SC"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Esse estado já está cadastrado!"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Estados"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Listagem de estados",
+                "tags": ["Estados"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Estados"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/estados/{id_estado}": {
+            "put": {
+                "summary": "Edição de estados",
+                "tags": ["Estados"],
+                "parameters": {
+                    "in": "path",
+                    "name": "id_estado",
+                    "required": true,
+                    "schema": {
+                        "type": "number"
+                    },
+                    "description": "ID do estado que será editado"
+                },
+                "requestBody": {
+                    "description": "Corpo da requisição",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Estados"
+                            },
+                            "examples": {
+                                "estado": {
+                                    "value": {
+                                        "estado": "Acre",
+                                        "sigla": "AC"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Estados"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Exclusão de endereço",
+                "tags": ["Endereços"],
+                "parameters": {
+                    "in": "path",
+                    "name": "id_endereco",
+                    "required": true,
+                    "schema": {
+                        "type": "number"
+                    },
+                    "description": "ID do endereço que será excluído"
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Enderecos"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/marcas": {
+            "post": {
+                "summary": "Cadastro de marcas",
+                "tags": ["Marcas"],
+                "requestBody": {
+                    "description": "Corpo da requisição",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Marcas"
+                            },
+                            "examples": {
+                                "marca": {
+                                    "value": {
+                                        "marca": "Puma"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Essa marca já está cadastrada!"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Marcas"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Listagem de marcas",
+                "tags": ["Marcas"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Marcas"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/marcas/{id_marca}": {
+            "put": {
+                "summary": "Edição de marcas",
+                "tags": ["Marcas"],
+                "parameters": {
+                    "in": "path",
+                    "name": "id_marca",
+                    "required": true,
+                    "schema": {
+                        "type": "number"
+                    },
+                    "description": "ID da marca que será editada"
+                },
+                "requestBody": {
+                    "description": "Corpo da requisição",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Marcas"
+                            },
+                            "examples": {
+                                "marca": {
+                                    "value": {
+                                        "marca": "Topper"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Marcas"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Exclusão de marca",
+                "tags": ["Marcas"],
+                "parameters": {
+                    "in": "path",
+                    "name": "id_marca",
+                    "required": true,
+                    "schema": {
+                        "type": "number"
+                    },
+                    "description": "ID da marca que será excluída"
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Marcas"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/produtos": {
+            "post": {
+                "summary": "Cadastro de produtos",
+                "tags": ["Produtos"],
+                "requestBody": {
+                    "description": "Corpo da requisição",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Produtos"
+                            },
+                            "examples": {
+                                "marca": {
+                                    "value": {
+                                        "nome": "camiseta esportiva",
+                                        "descricao": "camiseta para esportes",
+                                        "imagem": "images/camiseta_esportiva.png",
+                                        "preco": 200,
+                                        "estoque": 20,
+                                        "categoria": 1,
+                                        "marca": 1,
+                                        "imposto": 20
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Produtos"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Listagem de produtos",
+                "tags": ["Produtos"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Produtos"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/produtos/{id_produto}": {
+            "put": {
+                "summary": "Edição de produtos",
+                "tags": ["Produtos"],
+                "parameters": {
+                    "in": "path",
+                    "name": "id_produto",
+                    "required": true,
+                    "schema": {
+                        "type": "number"
+                    },
+                    "description": "ID do produto que será editado"
+                },
+                "requestBody": {
+                    "description": "Corpo da requisição",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Produtos"
+                            },
+                            "examples": {
+                                "marca": {
+                                    "value": {
+                                        "nome": "camiseta não esportiva",
+                                        "descricao": "camiseta para não fazer esportes",
+                                        "imagem": "images/camiseta_nao_esportiva.png",
+                                        "preco": 10,
+                                        "estoque": 20,
+                                        "categoria": 1,
+                                        "marca": 1,
+                                        "imposto": 50
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Produtos"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Exclusão de produtos",
+                "tags": ["Produtos"],
+                "parameters": {
+                    "in": "path",
+                    "name": "id_produto",
+                    "required": true,
+                    "schema": {
+                        "type": "number"
+                    },
+                    "description": "ID do produto que será excluído"
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Produtos"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Administrador": {
+                "type": "object",
+                "properties": {
+                    "id_administrador": {
+                        "type": "number"
+                    },
+                    "nome": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "senha": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Categorias": {
+                "type": "object",
+                "properties": {
+                    "id_categoria": {
+                        "type": "number"
+                    },
+                    "nome": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Cidades": {
+                "type": "object",
+                "properties": {
+                    "id_cidade": {
+                        "type": "number"
+                    },
+                    "cidade": {
+                        "type": "string"
+                    },
+                    "estado": {
+                        "type": "number"
+                    }
+                }
+            },
+            "Clientes": {
+                "type": "object",
+                "properties": {
+                    "id_cliente": {
+                        "type": "number"
+                    },
+                    "nome": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "senha": {
+                        "type": "string"
+                    },
+                    "cpf": {
+                        "type": "string"
+                    },
+                    "endereco": {
+                        "type": "number"
+                    }
+                }
+            },
+            "Compras": {
+                "type": "object",
+                "properties": {
+                    "id_compra": {
+                        "type": "number"
+                    },
+                    "cliente": {
+                        "type": "number"
+                    },
+                    "total": {
+                        "type": "number"
+                    }
+                }
+            },
+            "Enderecos": {
+                "type": "object",
+                "properties": {
+                    "id_endereco": {
+                        "type": "number"
+                    },
+                    "rua": {
+                        "type": "string"
+                    },
+                    "bairro": {
+                        "type": "string"
+                    },
+                    "numero": {
+                        "type": "string"
+                    },
+                    "cidade": {
+                        "type": "number"
+                    },
+                    "estado": {
+                        "type": "number"
+                    },
+                    "CEP": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Estados": {
+                "type": "object",
+                "properties": {
+                    "id_estado": {
+                        "type": "number"
+                    },
+                    "estado": {
+                        "type": "string"
+                    },
+                    "sigla": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Marcas": {
+                "type": "object",
+                "properties": {
+                    "id_marca": {
+                        "type": "number"
+                    },
+                    "marca": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Produtos": {
+                "type": "object",
+                "properties": {
+                    "id_produto": {
+                        "type": "number"
+                    },
+                    "nome": {
+                        "type": "string"
+                    },
+                    "descricao": {
+                        "type": "string"
+                    },
+                    "imagem": {
+                        "type": "string"
+                    },
+                    "preco": {
+                        "type": "number"
+                    },
+                    "estoque": {
+                        "type": "number"
+                    },
+                    "categoria": {
+                        "type": "number"
+                    },
+                    "marca": {
+                        "type": "number"
+                    },
+                    "imposto": {
+                        "type": "number"
+                    }
+                }
+            }
+        }
+    }
+}
