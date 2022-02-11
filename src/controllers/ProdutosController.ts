@@ -3,6 +3,16 @@ import { Categorias } from "../models/Categorias";
 import { Marcas } from "../models/Marcas";
 import { Request, Response } from "express";
 
+type IProductModel = {
+    nome: String
+    descricao: String
+    imagem?: String
+    preco: number
+    estoque: number
+    categoria: number
+    marca: number
+    imposto: number
+}
 export class ProdutosController {
     async index(request: Request, response: Response) {
         try {
@@ -21,14 +31,17 @@ export class ProdutosController {
     }
 
     async store(request: Request, response: Response) {
-        const { nome, descricao, imagem, preco, estoque, categoria, marca, imposto } = request.body;
+        const data: IProductModel = request.body;
+
+        console.log(data.nome)
 
         try {
-            if (!nome || !descricao || !imagem || !preco || !estoque || !categoria || !marca || !imposto) {
+            if (!data.nome || !data.descricao || !data.preco || !data.estoque || !data.categoria || !data.marca || !data.imposto) {
                 return response.status(400).json('Preencha os campos')
             }
+            data.imagem = request.file ? request.file.filename : undefined
             //@ts-ignore
-            const result = await Produtos.create({ nome, descricao, imagem, preco, estoque, categoria, marca, imposto })
+            const result = await Produtos.create(data)
 
             return response.json(result)
         } catch (err) {
@@ -37,14 +50,15 @@ export class ProdutosController {
     }
 
     async edit(request: Request, response: Response) {
-        const { nome, descricao, imagem, preco, estoque, categoria, marca, imposto } = request.body;
+        const data: IProductModel = request.body;
         const { id_produto } = request.params;
 
         try {
+            data.imagem = request.file ? request.file.filename : undefined
             //@ts-ignore
             const result = await ComprasProdutos.findByPk(id_produto)
 
-            const afterUpdate = await result.update({ nome, descricao, imagem, preco, estoque, categoria, marca, imposto })
+            const afterUpdate = await result.update(data)
 
             return response.json(afterUpdate)
         } catch (err) {

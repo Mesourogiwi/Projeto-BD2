@@ -2,6 +2,9 @@ import { Router } from "express";
 
 const routes = Router()
 
+import multer from "multer";
+import { multerMiddleware } from "./middlewares/multer";
+
 import { AdministradoresController } from "./controllers/AdministradoresController";
 import { CategoriasController } from "./controllers/CategoriasController";
 import { CidadesController } from "./controllers/CidadesController";
@@ -59,7 +62,7 @@ routes.put('/marcas/:id_marca', new MarcasController().edit)
 routes.delete('/marcas/:id_marca', new MarcasController().destroy)
 
 routes.get('/produtos', new ProdutosController().index)
-routes.post('/produtos', new ProdutosController().store)
+routes.post('/produtos', multer(multerMiddleware).single('file'), new ProdutosController().store)
 routes.put('/produtos/:id_produto', new ProdutosController().edit)
 routes.delete('/produtos/:id_produto', new ProdutosController().destroy)
 

@@ -1081,7 +1081,7 @@
                     "description": "Corpo da requisição",
                     "required": true,
                     "content": {
-                        "application/json": {
+                        "multipart/form-data": {
                             "schema": {
                                 "$ref": "#/components/schemas/Produtos"
                             },
@@ -1151,7 +1151,7 @@
                     "description": "Corpo da requisição",
                     "required": true,
                     "content": {
-                        "application/json": {
+                        "multipart/form-data": {
                             "schema": {
                                 "$ref": "#/components/schemas/Produtos"
                             },
@@ -1358,7 +1358,7 @@
                     "descricao": {
                         "type": "string"
                     },
-                    "imagem": {
+                    "file": {
                         "type": "string"
                     },
                     "preco": {
