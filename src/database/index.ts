@@ -11,10 +11,9 @@ const connection = new Sequelize({
         timestamps: false,
     },
 })
-import { Administradores } from "../models/Administradores";
 import { Categorias } from "../models/Categorias";
 import { Cidades } from "../models/Cidades";
-import { Clientes } from "../models/Clientes";
+import { Usuarios } from "../models/Usuarios";
 import { Compras } from "../models/Compras";
 import { ComprasProdutos } from "../models/ComprasProdutos";
 import { Enderecos } from "../models/Enderecos";
@@ -31,10 +30,9 @@ connection.authenticate().then(() => {
     })
 })
 
-Administradores.init(connection)
 Categorias.init(connection)
 Cidades.init(connection)
-Clientes.init(connection)
+Usuarios.init(connection)
 Compras.init(connection)
 ComprasProdutos.init(connection)
 Enderecos.init(connection)
@@ -43,7 +41,7 @@ Marcas.init(connection)
 Produtos.init(connection)
 
 Cidades.associate(connection.models)
-Clientes.associate(connection.models)
+Usuarios.associate(connection.models)
 Compras.associate(connection.models)
 ComprasProdutos.associate(connection.models)
 Enderecos.associate(connection.models)

@@ -5,70 +5,64 @@ const routes = Router()
 import multer from "multer";
 import { multerMiddleware } from "./middlewares/multer";
 
-import { AdministradoresController } from "./controllers/AdministradoresController";
 import { CategoriasController } from "./controllers/CategoriasController";
 import { CidadesController } from "./controllers/CidadesController";
-import { ClientesController } from "./controllers/ClientesController";
+import { UsuariosController } from "./controllers/UsuariosController";
 import { ComprasController } from "./controllers/ComprasController";
 import { ComprasProdutosController } from "./controllers/ComprasProdutosController";
 import { EnderecosController } from "./controllers/EnderecosController";
 import { EstadosController } from "./controllers/EstadosController";
 import { MarcasController } from "./controllers/MarcasController";
 import { ProdutosController } from "./controllers/ProdutosController";
-import { ensuredAutehnticated } from "./middlewares/auth";
+import { ensuredAuthenticated } from "./middlewares/auth";
 import { AuthController } from "./controllers/AuthController";
-
-routes.get('/administradores', new AdministradoresController().index)
-routes.post('/administradores', new AdministradoresController().store)
-routes.put('/administradores/:id_administrador', new AdministradoresController().edit)
-routes.delete('/administradores/:id_administrador', new AdministradoresController().destroy)
+import { ensureAdmin } from "./middlewares/ensureAdmin";
 
 routes.get('/categorias', new CategoriasController().index)
-routes.post('/categorias', ensuredAutehnticated(), new CategoriasController().store)
-routes.put('/categorias/:id_categoria', ensuredAutehnticated(), new CategoriasController().edit)
-routes.delete('/categorias/:id_categoria', ensuredAutehnticated(), new CategoriasController().destroy)
+routes.post('/categorias', ensureAdmin(), ensuredAuthenticated(), new CategoriasController().store)
+routes.put('/categorias/:id_categoria', ensureAdmin(), ensuredAuthenticated(), new CategoriasController().edit)
+routes.delete('/categorias/:id_categoria', ensureAdmin(), ensuredAuthenticated(), new CategoriasController().destroy)
 
 routes.get('/cidades', new CidadesController().index)
-routes.post('/cidades', new CidadesController().store)
-routes.put('/cidades/:id_cidade', new CidadesController().edit)
-routes.delete('/cidades/:id_cidade', new CidadesController().destroy)
+routes.post('/cidades', ensureAdmin(), ensuredAuthenticated(), new CidadesController().store)
+routes.put('/cidades/:id_cidade', ensureAdmin(), ensuredAuthenticated(), new CidadesController().edit)
+routes.delete('/cidades/:id_cidade', ensureAdmin(), ensuredAuthenticated(), new CidadesController().destroy)
 
-routes.get('/clientes', new ClientesController().index)
-routes.post('/clientes', new ClientesController().store)
-routes.put('/clientes/:id_cliente', new ClientesController().edit)
-routes.delete('/clientes/:id_cliente', new ClientesController().destroy)
+routes.get('/usuarios', new UsuariosController().index)
+routes.put('/usuarios/:id_usuario', ensuredAuthenticated(), new UsuariosController().edit)
+routes.delete('/usuarios/:id_usuario', ensuredAuthenticated(), new UsuariosController().destroy)
 
 routes.get('/compras', new ComprasController().index)
 routes.post('/compras', new ComprasController().store)
 routes.put('/compras/:id_compra', new ComprasController().edit)
-routes.delete('/compras/:id_compra', new ComprasController().destroy)
+routes.delete('/compras/:id_compra', ensureAdmin(), ensuredAuthenticated(), new ComprasController().destroy)
 
 routes.get('/compras_produtos', new ComprasProdutosController().index)
 routes.post('/compras_produtos', new ComprasProdutosController().store)
 routes.put('/compras_produtos/:id_compras_produtos', new ComprasProdutosController().edit)
 routes.delete('/compras_produtos/:id_compras_produtos', new ComprasProdutosController().destroy)
 
-routes.get('/enderecos', new EnderecosController().index)
-routes.post('/enderecos', new EnderecosController().store)
-routes.put('/enderecos/:id_endereco', new EnderecosController().edit)
-routes.delete('/enderecos/:id_endereco', new EnderecosController().destroy)
+routes.get('/enderecos', ensureAdmin(), ensuredAuthenticated(), new EnderecosController().index)
+routes.post('/enderecos', ensuredAuthenticated(), new EnderecosController().store)
+routes.put('/enderecos/:id_endereco', ensuredAuthenticated(), new EnderecosController().edit)
+routes.delete('/enderecos/:id_endereco', ensuredAuthenticated(), new EnderecosController().destroy)
 
 routes.get('/estados', new EstadosController().index)
-routes.post('/estados', new EstadosController().store)
-routes.put('/estados/:id_estado', new EstadosController().edit)
-routes.delete('/estados/:id_estado', new EstadosController().destroy)
+routes.post('/estados', ensureAdmin(), ensuredAuthenticated(), new EstadosController().store)
+routes.put('/estados/:id_estado', ensureAdmin(), ensuredAuthenticated(), new EstadosController().edit)
+routes.delete('/estados/:id_estado', ensureAdmin(), ensuredAuthenticated(), new EstadosController().destroy)
 
 routes.get('/marcas', new MarcasController().index)
-routes.post('/marcas', ensuredAutehnticated(), new MarcasController().store)
-routes.put('/marcas/:id_marca', ensuredAutehnticated(), new MarcasController().edit)
-routes.delete('/marcas/:id_marca', ensuredAutehnticated(), new MarcasController().destroy)
+routes.post('/marcas', ensureAdmin(), ensuredAuthenticated(), new MarcasController().store)
+routes.put('/marcas/:id_marca', ensureAdmin(), ensuredAuthenticated(), new MarcasController().edit)
+routes.delete('/marcas/:id_marca', ensureAdmin(), ensuredAuthenticated(), new MarcasController().destroy)
 
 routes.get('/produtos', new ProdutosController().index)
-routes.post('/produtos', ensuredAutehnticated(), multer(multerMiddleware).single('file'), new ProdutosController().store)
-routes.put('/produtos/:id_produto', ensuredAutehnticated(), new ProdutosController().edit)
-routes.delete('/produtos/:id_produto', ensuredAutehnticated(), new ProdutosController().destroy)
+routes.post('/produtos', ensureAdmin(), ensuredAuthenticated(), multer(multerMiddleware).single('file'), new ProdutosController().store)
+routes.put('/produtos/:id_produto', ensureAdmin(), ensuredAuthenticated(), multer(multerMiddleware).single('file'), new ProdutosController().edit)
+routes.delete('/produtos/:id_produto', ensureAdmin(), ensuredAuthenticated(), new ProdutosController().destroy)
 
-routes.post('/registrar', new AuthController().register)
+routes.post('/cadastrar', new AuthController().register)
 routes.post('/login', new AuthController().authenticate)
 
 

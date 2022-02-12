@@ -23,6 +23,6 @@ export class Compras extends Model {
 
     static associate(models) {
         //@ts-ignore
-        this.belongsTo(models.Clientes, { foreignKey: 'cliente' })
+        this.belongsTo(models.Usuarios, { foreignKey: 'cliente' })
     }
 }

@@ -19,143 +19,11 @@
         }
     ],
     "paths": {
-        "/administradores": {
-            "post": {
-                "summary": "Cadastro de administradores",
-                "tags": ["Administradores"],
-                "requestBody": {
-                    "description": "Corpo da requisição",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Administrador"
-                            },
-                            "examples": {
-                                "administrador": {
-                                    "value": {
-                                        "nome": "João da Silva",
-                                        "email": "joaodasilva@gmail.com",
-                                        "senha": "123456"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "400": {
-                        "description": "Esse email já está cadastrado!"
-                    },
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "$ref": "#/components/schemas/Administrador"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "get": {
-                "summary": "Listagem de administradores",
-                "tags": ["Administradores"],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "$ref": "#/components/schemas/Administrador"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/administradores/{id_administrador}": {
-            "put": {
-                "summary": "Edição de administradores",
-                "tags": ["Administradores"],
-                "parameters": {
-                    "in": "path",
-                    "name": "id_administrador",
-                    "required": true,
-                    "schema": {
-                        "type": "number"
-                    },
-                    "description": "ID do administrador que será editado"
-                },
-                "requestBody": {
-                    "description": "Corpo da requisição",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Administrador"
-                            },
-                            "examples": {
-                                "administrador": {
-                                    "value": {
-                                        "nome": "João da Silva",
-                                        "email": "joaodasilva@gmail.com",
-                                        "senha": "123456"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "$ref": "#/components/schemas/Administrador"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "summary": "Exclusão de administradores",
-                "tags": ["Administradores"],
-                "parameters": {
-                    "in": "path",
-                    "name": "id_administrador",
-                    "required": true,
-                    "schema": {
-                        "type": "number"
-                    },
-                    "description": "ID do administrador que será excluído"
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "$ref": "#/components/schemas/Administrador"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/cidades": {
             "post": {
                 "summary": "Cadastro de cidades",
                 "tags": ["Cidades"],
+                "security": [{ "bearerAuth": [] }],
                 "requestBody": {
                     "description": "Corpo da requisição",
                     "required": true,
@@ -214,6 +82,7 @@
             "put": {
                 "summary": "Edição de cidades",
                 "tags": ["Cidades"],
+                "security": [{ "bearerAuth": [] }],
                 "parameters": {
                     "in": "path",
                     "name": "id_cidade",
@@ -259,6 +128,7 @@
             "delete": {
                 "summary": "Exclusão de cidade",
                 "tags": ["Cidades"],
+                "security": [{ "bearerAuth": [] }],
                 "parameters": {
                     "in": "path",
                     "name": "id_cidade",
@@ -287,6 +157,7 @@
             "post": {
                 "summary": "Cadastro de categorias",
                 "tags": ["Categorias"],
+                "security": [{ "bearerAuth": [] }],
                 "requestBody": {
                     "description": "Corpo da requisição",
                     "required": true,
@@ -344,6 +215,7 @@
             "put": {
                 "summary": "Edição de categorias",
                 "tags": ["Categorias"],
+                "security": [{ "bearerAuth": [] }],
                 "parameters": {
                     "in": "path",
                     "name": "id_categoria",
@@ -388,6 +260,7 @@
             "delete": {
                 "summary": "Exclusão de categoria",
                 "tags": ["Categorias"],
+                "security": [{ "bearerAuth": [] }],
                 "parameters": {
                     "in": "path",
                     "name": "id_categoria",
@@ -405,143 +278,6 @@
                                 "schema": {
                                     "type": "object",
                                     "$ref": "#/components/schemas/Categorias"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/clientes": {
-            "post": {
-                "summary": "Cadastro de clientes",
-                "tags": ["Clientes"],
-                "requestBody": {
-                    "description": "Corpo da requisição",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Clientes"
-                            },
-                            "examples": {
-                                "cliente": {
-                                    "value": {
-                                        "nome": "Valdinei",
-                                        "email": "valdinei@gmail.com",
-                                        "senha": "123456",
-                                        "cpf": "12345678900",
-                                        "endereco": 1
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "400": {
-                        "description": "Esse email/cpf já está cadastrado!"
-                    },
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "$ref": "#/components/schemas/Clientes"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "get": {
-                "summary": "Listagem de clientes",
-                "tags": ["Clientes"],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "$ref": "#/components/schemas/Clientes"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/clientes/{id_cliente}": {
-            "put": {
-                "summary": "Edição de cliente",
-                "tags": ["Clientes"],
-                "parameters": {
-                    "in": "path",
-                    "name": "id_cliente",
-                    "required": true,
-                    "schema": {
-                        "type": "number"
-                    },
-                    "description": "ID do cliente que será editado"
-                },
-                "requestBody": {
-                    "description": "Corpo da requisição",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Clientes"
-                            },
-                            "examples": {
-                                "cliente": {
-                                    "value": {
-                                        "nome": "Valdema",
-                                        "email": "valdemar@gmail.com",
-                                        "senha": "123456",
-                                        "cpf": "12345678900",
-                                        "endereco": 1
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "$ref": "#/components/schemas/Clientes"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "summary": "Exclusão de cliente",
-                "tags": ["Clientes"],
-                "parameters": {
-                    "in": "path",
-                    "name": "id_cliente",
-                    "required": true,
-                    "schema": {
-                        "type": "number"
-                    },
-                    "description": "ID do cliente que será excluído"
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "$ref": "#/components/schemas/Clientes"
                                 }
                             }
                         }
@@ -653,6 +389,7 @@
             "delete": {
                 "summary": "Exclusão de compra",
                 "tags": ["Compras"],
+                "security": [{ "bearerAuth": [] }],
                 "parameters": {
                     "in": "path",
                     "name": "id_compra",
@@ -681,6 +418,7 @@
             "post": {
                 "summary": "Cadastro de endereço",
                 "tags": ["Endereços"],
+                "security": [{ "bearerAuth": [] }],
                 "requestBody": {
                     "description": "Corpo da requisição",
                     "required": true,
@@ -721,6 +459,7 @@
             "get": {
                 "summary": "Listagem de endereços",
                 "tags": ["Endereços"],
+                "security": [{ "bearerAuth": [] }],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -740,6 +479,7 @@
             "put": {
                 "summary": "Edição de endereços",
                 "tags": ["Endereços"],
+                "security": [{ "bearerAuth": [] }],
                 "parameters": {
                     "in": "path",
                     "name": "id_endereco",
@@ -789,6 +529,7 @@
             "delete": {
                 "summary": "Exclusão de endereço",
                 "tags": ["Endereços"],
+                "security": [{ "bearerAuth": [] }],
                 "parameters": {
                     "in": "path",
                     "name": "id_endereco",
@@ -817,6 +558,7 @@
             "post": {
                 "summary": "Cadastro de estados",
                 "tags": ["Estados"],
+                "security": [{ "bearerAuth": [] }],
                 "requestBody": {
                     "description": "Corpo da requisição",
                     "required": true,
@@ -856,6 +598,7 @@
             "get": {
                 "summary": "Listagem de estados",
                 "tags": ["Estados"],
+                "security": [{ "bearerAuth": [] }],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -875,6 +618,7 @@
             "put": {
                 "summary": "Edição de estados",
                 "tags": ["Estados"],
+                "security": [{ "bearerAuth": [] }],
                 "parameters": {
                     "in": "path",
                     "name": "id_estado",
@@ -920,6 +664,7 @@
             "delete": {
                 "summary": "Exclusão de estado",
                 "tags": ["Estados"],
+                "security": [{ "bearerAuth": [] }],
                 "parameters": {
                     "in": "path",
                     "name": "id_estado",
@@ -948,6 +693,7 @@
             "post": {
                 "summary": "Cadastro de marcas",
                 "tags": ["Marcas"],
+                "security": [{ "bearerAuth": [] }],
                 "requestBody": {
                     "description": "Corpo da requisição",
                     "required": true,
@@ -1005,6 +751,7 @@
             "put": {
                 "summary": "Edição de marcas",
                 "tags": ["Marcas"],
+                "security": [{ "bearerAuth": [] }],
                 "parameters": {
                     "in": "path",
                     "name": "id_marca",
@@ -1049,6 +796,7 @@
             "delete": {
                 "summary": "Exclusão de marca",
                 "tags": ["Marcas"],
+                "security": [{ "bearerAuth": [] }],
                 "parameters": {
                     "in": "path",
                     "name": "id_marca",
@@ -1077,6 +825,7 @@
             "post": {
                 "summary": "Cadastro de produtos",
                 "tags": ["Produtos"],
+                "security": [{ "bearerAuth": [] }],
                 "requestBody": {
                     "description": "Corpo da requisição",
                     "required": true,
@@ -1138,6 +887,7 @@
             "put": {
                 "summary": "Edição de produtos",
                 "tags": ["Produtos"],
+                "security": [{ "bearerAuth": [] }],
                 "parameters": {
                     "in": "path",
                     "name": "id_produto",
@@ -1189,6 +939,7 @@
             "delete": {
                 "summary": "Exclusão de produtos",
                 "tags": ["Produtos"],
+                "security": [{ "bearerAuth": [] }],
                 "parameters": {
                     "in": "path",
                     "name": "id_produto",
@@ -1212,27 +963,203 @@
                     }
                 }
             }
+        },
+        "/usuarios": {
+            "get": {
+                "summary": "Listagem de usuários",
+                "tags": ["Usuários"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Usuarios"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/usuarios/{id_usuario}": {
+            "put": {
+                "summary": "Edição de usuário",
+                "tags": ["Usuários"],
+                "security": [{ "bearerAuth": [] }],
+                "parameters": {
+                    "in": "path",
+                    "name": "id_usuario",
+                    "required": true,
+                    "schema": {
+                        "type": "number"
+                    },
+                    "description": "ID do usuário que será editado"
+                },
+                "requestBody": {
+                    "description": "Corpo da requisição",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Usuarios"
+                            },
+                            "examples": {
+                                "cliente": {
+                                    "value": {
+                                        "nome": "Valdema",
+                                        "email": "valdemar@gmail.com",
+                                        "senha": "123456",
+                                        "cpf": "12345678900",
+                                        "endereco": 1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Usuarios"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Exclusão de usuário",
+                "tags": ["Usuários"],
+                "security": [{ "bearerAuth": [] }],
+                "parameters": {
+                    "in": "path",
+                    "name": "id_usuario",
+                    "required": true,
+                    "schema": {
+                        "type": "number"
+                    },
+                    "description": "ID do usuario que será excluído"
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Usuarios"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/cadastrar": {
+            "post": {
+                "summary": "Cadastro de usuário",
+                "tags": ["Autenticação"],
+                "requestBody": {
+                    "description": "Corpo da requisição",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Usuarios"
+                            },
+                            "examples": {
+                                "cliente": {
+                                    "value": {
+                                        "nome": "Valdemar",
+                                        "email": "valdemar@gmail.com",
+                                        "senha": "123456",
+                                        "cpf": "12345678900",
+                                        "endereco": 1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Usuarios"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Usuário já existe!"
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "summary": "Login de usuário",
+                "tags": ["Autenticação"],
+                "requestBody": {
+                    "description": "Corpo da requisição",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "senha": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "cliente": {
+                                    "value": {
+                                        "email": "teste6@teste6.com",
+                                        "senha": "123456"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Usuarios"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Email/Senha incorretos."
+                    },
+                    "401": {
+                        "description": "No token provided"
+                    }
+                }
+            }
         }
     },
     "components": {
         "schemas": {
-            "Administrador": {
-                "type": "object",
-                "properties": {
-                    "id_administrador": {
-                        "type": "number"
-                    },
-                    "nome": {
-                        "type": "string"
-                    },
-                    "email": {
-                        "type": "string"
-                    },
-                    "senha": {
-                        "type": "string"
-                    }
-                }
-            },
             "Categorias": {
                 "type": "object",
                 "properties": {
@@ -1254,29 +1181,6 @@
                         "type": "string"
                     },
                     "estado": {
-                        "type": "number"
-                    }
-                }
-            },
-            "Clientes": {
-                "type": "object",
-                "properties": {
-                    "id_cliente": {
-                        "type": "number"
-                    },
-                    "nome": {
-                        "type": "string"
-                    },
-                    "email": {
-                        "type": "string"
-                    },
-                    "senha": {
-                        "type": "string"
-                    },
-                    "cpf": {
-                        "type": "string"
-                    },
-                    "endereco": {
                         "type": "number"
                     }
                 }
@@ -1378,7 +1282,40 @@
                         "type": "number"
                     }
                 }
+            },
+            "Usuarios": {
+                "type": "object",
+                "properties": {
+                    "id_cliente": {
+                        "type": "number"
+                    },
+                    "nome": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "senha": {
+                        "type": "string"
+                    },
+                    "cpf": {
+                        "type": "string"
+                    },
+                    "endereco": {
+                        "type": "number"
+                    },
+                    "admin": {
+                        "type": "number"
+                    }
+                }
             }
+        }
+    },
+    "securitySchemes": {
+        "bearerAuth": {
+            "type": "http",
+            "scheme": "bearer",
+            "bearerFormat": "JWT"
         }
     }
 }

@@ -1,5 +1,5 @@
 import { Compras } from "../models/Compras";
-import { Clientes } from "../models/Clientes";
+import { Usuarios } from "../models/Usuarios";
 import { Request, Response } from "express";
 
 export class ComprasController {
@@ -8,7 +8,7 @@ export class ComprasController {
             //@ts-ignore
             const result = await Compras.findAll({
                 include: [
-                    { model: Clientes }
+                    { model: Usuarios }
                 ]
             });
 

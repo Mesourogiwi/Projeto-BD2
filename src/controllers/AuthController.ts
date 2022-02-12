@@ -1,17 +1,17 @@
 import { compare, hash } from 'bcrypt'
 import { Request, Response } from 'express'
-import { Clientes } from '../models/Clientes'
+import { Usuarios } from '../models/Usuarios'
 import { sign } from 'jsonwebtoken'
 
 export class AuthController {
     async register(request: Request, response: Response) {
         try {
-            const { nome, email, senha, cpf, endereco } = request.body
+            const { nome, email, senha, cpf, endereco, admin } = request.body
             if (!nome || !email || !senha || !cpf || !endereco) {
                 return response.status(400).json('Preencha os campos')
             }
             //@ts-ignore
-            if (await Clientes.findOne({
+            if (await Usuarios.findOne({
                 where: {
                     email
                 }
@@ -20,10 +20,20 @@ export class AuthController {
             }
             const passwordHash = await hash(senha, 10)
             //@ts-ignore
-            const cliente = await Clientes.create({ nome, email, senha: passwordHash, cpf, endereco })
-            cliente.setDataValue('senha', undefined)
+            const usuario = await Usuarios.create({ nome, email, senha: passwordHash, cpf, endereco, admin: admin ?? 0 })
+            usuario.setDataValue('senha', undefined)
 
-            return response.send({ cliente })
+            const token = sign({
+                usuario: {
+                    id: usuario.getDataValue('id_usuario'),
+                    admin: admin ?? 0
+                }
+            }, process.env.JWT_SECRET, {
+                subject: String(usuario.getDataValue('id_usuario')),
+                expiresIn: 86400
+            })
+
+            return response.send({ usuario, token })
         } catch (err) {
             return response.status(400).send({ error: 'Falha no registro' })
         }
@@ -32,29 +42,29 @@ export class AuthController {
         const { email, senha } = request.body
 
         //@ts-ignore
-        const cliente = await Clientes.findOne({
+        const usuario = await Usuarios.findOne({
             where: {
                 email
             }
         })
 
-        if (!cliente) {
-            return response.status(400).send({ error: 'Usuário não encontrado.' })
+        if (!usuario) {
+            return response.status(400).send({ error: 'Email/Senha incorretos.' })
         }
 
-        await compare(senha, cliente.getDataValue('senha')).then((result) => {
+        await compare(senha, usuario.getDataValue('senha')).then((result) => {
             if (!result) {
-                return response.status(400).send({ error: 'Senha Inválida' })
+                return response.status(400).send({ error: 'Email/Senha incorretos.' })
             }
         })
 
-        cliente.setDataValue('senha', undefined)
+        usuario.setDataValue('senha', undefined)
 
-        const token = sign({ id: cliente.getDataValue('id_cliente') }, process.env.JWT_SECRET, {
-            subject: String(cliente.getDataValue('id_cliente')),
+        const token = sign({ id: usuario.getDataValue('id_usuario') }, process.env.JWT_SECRET, {
+            subject: String(usuario.getDataValue('id_usuario')),
             expiresIn: 86400
         })
 
-        response.send({ cliente, token })
+        response.send({ usuario, token })
     }
 }

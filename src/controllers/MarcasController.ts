@@ -29,7 +29,7 @@ export class MarcasController {
                 return response.status(400).json('Essa marca já está cadastrada!')
             }
             //@ts-ignore
-            const result = await Marcas.create({ estado, sigla })
+            const result = await Marcas.create({ marca })
 
             return response.json(result)
         } catch (err) {

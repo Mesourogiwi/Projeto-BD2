@@ -7,7 +7,7 @@ interface IPayload {
     sub: string
 }
 
-export const ensuredAutehnticated = () => {
+export const ensuredAuthenticated = () => {
     return async (request: Request, response: Response, next: NextFunction) => {
         const authHeader = request.headers.authorization;
 
