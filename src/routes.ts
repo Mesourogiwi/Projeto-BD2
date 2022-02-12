@@ -15,6 +15,8 @@ import { EnderecosController } from "./controllers/EnderecosController";
 import { EstadosController } from "./controllers/EstadosController";
 import { MarcasController } from "./controllers/MarcasController";
 import { ProdutosController } from "./controllers/ProdutosController";
+import { ensuredAutehnticated } from "./middlewares/auth";
+import { AuthController } from "./controllers/AuthController";
 
 routes.get('/administradores', new AdministradoresController().index)
 routes.post('/administradores', new AdministradoresController().store)
@@ -22,9 +24,9 @@ routes.put('/administradores/:id_administrador', new AdministradoresController()
 routes.delete('/administradores/:id_administrador', new AdministradoresController().destroy)
 
 routes.get('/categorias', new CategoriasController().index)
-routes.post('/categorias', new CategoriasController().store)
-routes.put('/categorias/:id_categoria', new CategoriasController().edit)
-routes.delete('/categorias/:id_categoria', new CategoriasController().destroy)
+routes.post('/categorias', ensuredAutehnticated(), new CategoriasController().store)
+routes.put('/categorias/:id_categoria', ensuredAutehnticated(), new CategoriasController().edit)
+routes.delete('/categorias/:id_categoria', ensuredAutehnticated(), new CategoriasController().destroy)
 
 routes.get('/cidades', new CidadesController().index)
 routes.post('/cidades', new CidadesController().store)
@@ -57,14 +59,17 @@ routes.put('/estados/:id_estado', new EstadosController().edit)
 routes.delete('/estados/:id_estado', new EstadosController().destroy)
 
 routes.get('/marcas', new MarcasController().index)
-routes.post('/marcas', new MarcasController().store)
-routes.put('/marcas/:id_marca', new MarcasController().edit)
-routes.delete('/marcas/:id_marca', new MarcasController().destroy)
+routes.post('/marcas', ensuredAutehnticated(), new MarcasController().store)
+routes.put('/marcas/:id_marca', ensuredAutehnticated(), new MarcasController().edit)
+routes.delete('/marcas/:id_marca', ensuredAutehnticated(), new MarcasController().destroy)
 
 routes.get('/produtos', new ProdutosController().index)
-routes.post('/produtos', multer(multerMiddleware).single('file'), new ProdutosController().store)
-routes.put('/produtos/:id_produto', new ProdutosController().edit)
-routes.delete('/produtos/:id_produto', new ProdutosController().destroy)
+routes.post('/produtos', ensuredAutehnticated(), multer(multerMiddleware).single('file'), new ProdutosController().store)
+routes.put('/produtos/:id_produto', ensuredAutehnticated(), new ProdutosController().edit)
+routes.delete('/produtos/:id_produto', ensuredAutehnticated(), new ProdutosController().destroy)
+
+routes.post('/registrar', new AuthController().register)
+routes.post('/login', new AuthController().authenticate)
 
 
 export { routes }
