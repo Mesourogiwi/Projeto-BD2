@@ -51,7 +51,7 @@ export class AuthController {
             return response.send({ usuario, token })
         } catch (err) {
             console.log(err)
-            return response.status(400).send({ error: 'Falha no registro' })
+            return response.status(502).send({ error: 'Falha no serviço' })
         }
     }
     async authenticate(request: Request, response: Response) {
@@ -85,7 +85,7 @@ export class AuthController {
             response.send({ usuario, token })
         } catch (err) {
             console.log(err)
-            return response.status(400).send({ error: 'Falha no registro' })
+            return response.status(502).send({ error: 'Falha no serviço' })
         }
     }
 }
