@@ -33,6 +33,8 @@ export class AuthController {
                 })
             }
 
+            console.log('zzzzz', resultEndereco?.getDataValue('id_endereco'))
+
             const passwordHash = await hash(senha, 10)
             //@ts-ignore
             const usuario = await Usuarios.create({ nome, email, senha: passwordHash, cpf, endereco: resultEndereco?.getDataValue('id_endereco') ?? null, admin: admin ?? 0 })
@@ -50,6 +52,7 @@ export class AuthController {
 
             return response.send({ usuario, token })
         } catch (err) {
+            console.log(err)
             return response.status(400).send({ error: 'Falha no registro' })
         }
     }

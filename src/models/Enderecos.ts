@@ -20,7 +20,7 @@ export class Enderecos extends Model {
             },
             {
                 sequelize,
-                tableName: 'cidades'
+                tableName: 'enderecos'
             }
         )
     }

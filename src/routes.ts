@@ -10,7 +10,7 @@ import { CidadesController } from "./controllers/CidadesController";
 import { UsuariosController } from "./controllers/UsuariosController";
 import { ComprasController } from "./controllers/ComprasController";
 import { ComprasProdutosController } from "./controllers/ComprasProdutosController";
-import { EnderecosController } from "./controllers/EnderecosController";
+// import { EnderecosController } from "./controllers/EnderecosController";
 import { EstadosController } from "./controllers/EstadosController";
 import { MarcasController } from "./controllers/MarcasController";
 import { ProdutosController } from "./controllers/ProdutosController";
@@ -42,10 +42,10 @@ routes.post('/compras_produtos', new ComprasProdutosController().store)
 routes.put('/compras_produtos/:id_compras_produtos', new ComprasProdutosController().edit)
 routes.delete('/compras_produtos/:id_compras_produtos', new ComprasProdutosController().destroy)
 
-routes.get('/enderecos', ensureAdmin(), ensuredAuthenticated(), new EnderecosController().index)
-routes.post('/enderecos', ensuredAuthenticated(), new EnderecosController().store)
-routes.put('/enderecos/:id_endereco', ensuredAuthenticated(), new EnderecosController().edit)
-routes.delete('/enderecos/:id_endereco', ensuredAuthenticated(), new EnderecosController().destroy)
+// routes.get('/enderecos', ensureAdmin(), ensuredAuthenticated(), new EnderecosController().index)
+// routes.post('/enderecos', ensuredAuthenticated(), new EnderecosController().store)
+// routes.put('/enderecos/:id_endereco', ensuredAuthenticated(), new EnderecosController().edit)
+// routes.delete('/enderecos/:id_endereco', ensuredAuthenticated(), new EnderecosController().destroy)
 
 routes.get('/estados', new EstadosController().index)
 routes.post('/estados', ensureAdmin(), ensuredAuthenticated(), new EstadosController().store)

@@ -414,146 +414,6 @@
                 }
             }
         },
-        "/enderecos": {
-            "post": {
-                "summary": "Cadastro de endereço",
-                "tags": ["Endereços"],
-                "security": [{ "bearerAuth": [] }],
-                "requestBody": {
-                    "description": "Corpo da requisição",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Enderecos"
-                            },
-                            "examples": {
-                                "endereco": {
-                                    "value": {
-                                        "rua": "rua",
-                                        "bairro": "bairro",
-                                        "numero": "123",
-                                        "cidade": 1,
-                                        "estado": 1,
-                                        "CEP": "12345678"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "$ref": "#/components/schemas/Enderecos"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "get": {
-                "summary": "Listagem de endereços",
-                "tags": ["Endereços"],
-                "security": [{ "bearerAuth": [] }],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "$ref": "#/components/schemas/Enderecos"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/enderecos/{id_endereco}": {
-            "put": {
-                "summary": "Edição de endereços",
-                "tags": ["Endereços"],
-                "security": [{ "bearerAuth": [] }],
-                "parameters": {
-                    "in": "path",
-                    "name": "id_endereco",
-                    "required": true,
-                    "schema": {
-                        "type": "number"
-                    },
-                    "description": "ID do endereço que será editado"
-                },
-                "requestBody": {
-                    "description": "Corpo da requisição",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Enderecos"
-                            },
-                            "examples": {
-                                "endereco": {
-                                    "value": {
-                                        "rua": "rua 2",
-                                        "bairro": "bairro 2",
-                                        "numero": "1234",
-                                        "cidade": 2,
-                                        "estado": 2,
-                                        "CEP": "87654321"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "$ref": "#/components/schemas/Enderecos"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "summary": "Exclusão de endereço",
-                "tags": ["Endereços"],
-                "security": [{ "bearerAuth": [] }],
-                "parameters": {
-                    "in": "path",
-                    "name": "id_endereco",
-                    "required": true,
-                    "schema": {
-                        "type": "number"
-                    },
-                    "description": "ID do endereço que será excluído"
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "$ref": "#/components/schemas/Enderecos"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/estados": {
             "post": {
                 "summary": "Cadastro de estados",
@@ -1012,7 +872,16 @@
                                         "email": "valdemar@gmail.com",
                                         "senha": "123456",
                                         "cpf": "12345678900",
-                                        "endereco": 1
+                                        "endereco": {
+                                            "value": {
+                                                "rua": "rua",
+                                                "bairro": "bairro",
+                                                "numero": "123",
+                                                "cidade": 1,
+                                                "estado": 1,
+                                                "CEP": "12345678"
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -1080,7 +949,16 @@
                                         "email": "valdemar@gmail.com",
                                         "senha": "123456",
                                         "cpf": "12345678900",
-                                        "endereco": 1
+                                        "endereco": {
+                                            "value": {
+                                                "rua": "rua",
+                                                "bairro": "bairro",
+                                                "numero": "123",
+                                                "cidade": 1,
+                                                "estado": 1,
+                                                "CEP": "12345678"
+                                            }
+                                        }
                                     }
                                 }
                             }
