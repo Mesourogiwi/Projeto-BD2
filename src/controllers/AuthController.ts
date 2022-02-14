@@ -33,8 +33,6 @@ export class AuthController {
                 })
             }
 
-            console.log('zzzzz', resultEndereco?.getDataValue('id_endereco'))
-
             const passwordHash = await hash(senha, 10)
             //@ts-ignore
             const usuario = await Usuarios.create({ nome, email, senha: passwordHash, cpf, endereco: resultEndereco?.getDataValue('id_endereco') ?? null, admin: admin ?? 0 })
@@ -59,30 +57,35 @@ export class AuthController {
     async authenticate(request: Request, response: Response) {
         const { email, senha } = request.body
 
-        //@ts-ignore
-        const usuario = await Usuarios.findOne({
-            where: {
-                email
-            }
-        })
+        try {
+            //@ts-ignore
+            const usuario = await Usuarios.findOne({
+                where: {
+                    email
+                }
+            })
 
-        if (!usuario) {
-            return response.status(400).send({ error: 'Email/Senha incorretos.' })
-        }
-
-        await compare(senha, usuario.getDataValue('senha')).then((result) => {
-            if (!result) {
+            if (!usuario) {
                 return response.status(400).send({ error: 'Email/Senha incorretos.' })
             }
-        })
 
-        usuario.setDataValue('senha', undefined)
+            await compare(senha, usuario.getDataValue('senha')).then((result) => {
+                if (!result) {
+                    return response.status(400).send({ error: 'Email/Senha incorretos.' })
+                }
+            })
 
-        const token = sign({ id: usuario.getDataValue('id_usuario') }, process.env.JWT_SECRET, {
-            subject: String(usuario.getDataValue('id_usuario')),
-            expiresIn: 86400
-        })
+            usuario.setDataValue('senha', undefined)
 
-        response.send({ usuario, token })
+            const token = sign({ id: usuario.getDataValue('id_usuario') }, process.env.JWT_SECRET, {
+                subject: String(usuario.getDataValue('id_usuario')),
+                expiresIn: 86400
+            })
+
+            response.send({ usuario, token })
+        } catch (err) {
+            console.log(err)
+            return response.status(400).send({ error: 'Falha no registro' })
+        }
     }
 }
