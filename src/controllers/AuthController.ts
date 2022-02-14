@@ -1,13 +1,14 @@
 import { compare, hash } from 'bcrypt'
 import { Request, Response } from 'express'
-import { Usuarios } from '../models/Usuarios'
+import { Usuarios, TypesUsuarios } from '../models/Usuarios'
+import { Enderecos } from '../models/Enderecos'
 import { sign } from 'jsonwebtoken'
 
 export class AuthController {
     async register(request: Request, response: Response) {
         try {
-            const { nome, email, senha, cpf, endereco, admin } = request.body
-            if (!nome || !email || !senha || !cpf || !endereco) {
+            const { nome, email, senha, cpf, endereco, admin }: TypesUsuarios = request.body
+            if (!nome || !email || !senha || !cpf) {
                 return response.status(400).json('Preencha os campos')
             }
             //@ts-ignore
@@ -18,9 +19,23 @@ export class AuthController {
             })) {
                 return response.status(400).send({ error: 'Usuário já existe!' })
             }
+
+            let resultEndereco
+            if (endereco) {
+                //@ts-ignore
+                resultEndereco = await Enderecos.create({
+                    rua: endereco.rua,
+                    bairro: endereco.bairro,
+                    numero: endereco?.numero ?? null,
+                    cidade: endereco.cidade,
+                    estado: endereco.estado,
+                    CEP: endereco.CEP
+                })
+            }
+
             const passwordHash = await hash(senha, 10)
             //@ts-ignore
-            const usuario = await Usuarios.create({ nome, email, senha: passwordHash, cpf, endereco, admin: admin ?? 0 })
+            const usuario = await Usuarios.create({ nome, email, senha: passwordHash, cpf, endereco: resultEndereco?.getDataValue('id_endereco') ?? null, admin: admin ?? 0 })
             usuario.setDataValue('senha', undefined)
 
             const token = sign({

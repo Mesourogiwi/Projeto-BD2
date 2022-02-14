@@ -20,8 +20,6 @@ export const ensuredAuthenticated = () => {
         try {
             const { sub } = verify(token, process.env.JWT_SECRET) as IPayload
 
-            console.log(verify(token, process.env.JWT_SECRET))
-
             request.id_cliente = sub.toString()
 
             return next()

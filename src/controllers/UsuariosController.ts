@@ -1,4 +1,4 @@
-import { Usuarios } from "../models/Usuarios";
+import { Usuarios, TypesUsuarios } from "../models/Usuarios";
 import { Enderecos } from "../models/Enderecos";
 import { Request, Response } from "express";
 
@@ -22,19 +22,47 @@ export class UsuariosController {
     }
 
     async edit(request: Request, response: Response) {
-        const { nome, email, senha, cpf, endereco } = request.body;
+        const { nome, email, senha, cpf, endereco }: TypesUsuarios = request.body;
         const { id_usuario } = request.params;
 
         try {
             //@ts-ignore
             const result = await Usuarios.findByPk(id_usuario)
 
+            let resultEndereco
+            if (result.getDataValue('endereco')) {
+                //@ts-ignore
+                resultEndereco = await Enderecos.update({
+                    rua: endereco.rua,
+                    bairro: endereco.bairro,
+                    numero: endereco?.numero ?? null,
+                    cidade: endereco.cidade,
+                    estado: endereco.estado,
+                    CEP: endereco.CEP
+                }, {
+                    where: {
+                        id_endereco: result.getDataValue('endereco')
+                    }
+                })
+            }
+            else if (endereco) {
+                //@ts-ignore
+                resultEndereco = await Enderecos.create({
+                    rua: endereco.rua,
+                    bairro: endereco.bairro,
+                    numero: endereco?.numero ?? null,
+                    cidade: endereco.cidade,
+                    estado: endereco.estado,
+                    CEP: endereco.CEP
+                })
+            }
+
             const afterUpdate = await result.update({
                 nome,
                 email,
                 senha,
                 cpf,
-                endereco
+                endereco: resultEndereco?.getDataValue('id_endereco') ?? null
             })
 
             return response.json(afterUpdate)

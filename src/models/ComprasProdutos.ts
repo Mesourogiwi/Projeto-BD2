@@ -29,3 +29,9 @@ export class ComprasProdutos extends Model {
         this.belongsTo(models.Compras, { foreignKey: 'compra' })
     }
 }
+
+export type TypesComprasProdutos = {
+    produto: number,
+    compra: number,
+    quantidade: number
+}

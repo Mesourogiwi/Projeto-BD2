@@ -1302,7 +1302,8 @@
                         "type": "string"
                     },
                     "endereco": {
-                        "type": "number"
+                        "type": "object",
+                        "$ref": "#/components/schemas/Enderecos"
                     },
                     "admin": {
                         "type": "number"

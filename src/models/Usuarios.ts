@@ -1,4 +1,5 @@
 import { Model, DataTypes } from "sequelize";
+import { TypesEndereco } from "./Enderecos";
 
 //@ts-ignore
 export class Usuarios extends Model {
@@ -29,4 +30,13 @@ export class Usuarios extends Model {
         //@ts-ignore
         this.belongsTo(models.Enderecos, { foreignKey: 'endereco' })
     }
+}
+
+export type TypesUsuarios = {
+    nome: string,
+    email: string,
+    senha: string,
+    cpf: string,
+    endereco: TypesEndereco,
+    admin?: boolean
 }

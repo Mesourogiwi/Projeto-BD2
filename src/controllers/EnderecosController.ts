@@ -1,4 +1,4 @@
-import { Enderecos } from "../models/Enderecos";
+import { Enderecos, TypesEndereco } from "../models/Enderecos";
 import { Estados } from "../models/Estados";
 import { Cidades } from "../models/Cidades";
 import { Request, Response } from "express";
@@ -21,7 +21,7 @@ export class EnderecosController {
     }
 
     async store(request: Request, response: Response) {
-        const { rua, bairro, numero, cidade, estado, CEP } = request.body;
+        const { rua, bairro, numero, cidade, estado, CEP }: TypesEndereco = request.body;
 
         try {
             if (!rua || !bairro || !numero || !cidade || !estado || !CEP) {
@@ -37,7 +37,7 @@ export class EnderecosController {
     }
 
     async edit(request: Request, response: Response) {
-        const { rua, bairro, numero, cidade, estado, CEP } = request.body;
+        const { rua, bairro, numero, cidade, estado, CEP }: TypesEndereco = request.body;
         const { id_endereco } = request.params;
 
         try {

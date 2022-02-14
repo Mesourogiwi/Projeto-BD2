@@ -32,3 +32,12 @@ export class Enderecos extends Model {
         this.belongsTo(models.Cidades, { foreignKey: 'cidade' })
     }
 }
+
+export type TypesEndereco = {
+    rua: String,
+    bairro: String,
+    numero?: String,
+    cidade: number,
+    estado: number,
+    CEP: String
+}
