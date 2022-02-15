@@ -31,6 +31,7 @@ export class ComprasProdutos extends Model {
 }
 
 export type TypesComprasProdutos = {
+    id_compra_produto: number,
     produto: number,
     compra: number,
     quantidade: number

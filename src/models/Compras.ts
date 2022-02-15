@@ -1,4 +1,5 @@
 import { Model, DataTypes } from "sequelize";
+import { ComprasProdutos, TypesComprasProdutos } from "./ComprasProdutos";
 
 //@ts-ignore
 export class Compras extends Model {
@@ -25,4 +26,10 @@ export class Compras extends Model {
         //@ts-ignore
         this.belongsTo(models.Usuarios, { foreignKey: 'cliente' })
     }
+}
+
+export type TypesCompras = {
+    cliente: number
+    total: number
+    comprasProdutos: TypesComprasProdutos[]
 }

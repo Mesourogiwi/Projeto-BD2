@@ -301,7 +301,13 @@
                                 "compra": {
                                     "value": {
                                         "cliente": 1,
-                                        "total": 500
+                                        "total": 500,
+                                        "comprasProdutos": [
+                                            {
+                                                "produto": 1,
+                                                "quantidade": 5
+                                            }
+                                        ]
                                     }
                                 }
                             }
@@ -365,7 +371,14 @@
                                 "compra": {
                                     "value": {
                                         "cliente": 2,
-                                        "total": 800
+                                        "total": 800,
+                                        "comprasProdutos": [
+                                            {
+                                                "produto": 1,
+                                                "quantidade": 5,
+                                                "id_compra_produto": 2
+                                            }
+                                        ]
                                     }
                                 }
                             }
@@ -1073,6 +1086,24 @@
                         "type": "number"
                     },
                     "total": {
+                        "type": "number"
+                    },
+                    "comprasProdutos": {
+                        "type": "array",
+                        "$ref": "#/components/schemas/ComprasProdutos"
+                    }
+                }
+            },
+            "ComprasProdutos": {
+                "type": "object",
+                "properties": {
+                    "id_compra_produto": {
+                        "type": "number"
+                    },
+                    "produto": {
+                        "type": "number"
+                    },
+                    "quantidade": {
                         "type": "number"
                     }
                 }
