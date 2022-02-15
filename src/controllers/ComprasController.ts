@@ -27,6 +27,9 @@ export class ComprasController {
             if (!cliente || !total) {
                 return response.status(400).json('Preencha os campos')
             }
+            if (!comprasProdutos) {
+                return response.status(400).json('Carrinho vazio!')
+            }
             //@ts-ignore
             const result = await Compras.create({ cliente, total })
 
