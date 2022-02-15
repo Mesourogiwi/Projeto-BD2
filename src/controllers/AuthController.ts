@@ -77,7 +77,12 @@ export class AuthController {
 
             usuario.setDataValue('senha', undefined)
 
-            const token = sign({ id: usuario.getDataValue('id_usuario') }, process.env.JWT_SECRET, {
+            const token = sign({
+                usuario: {
+                    id: usuario.getDataValue('id_usuario'),
+                    admin: usuario.getDataValue('admin')
+                }
+            }, process.env.JWT_SECRET, {
                 subject: String(usuario.getDataValue('id_usuario')),
                 expiresIn: 86400
             })

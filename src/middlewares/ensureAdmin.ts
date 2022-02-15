@@ -11,6 +11,10 @@ export const ensureAdmin = () => {
     return (request: Request, response: Response, next: NextFunction) => {
         const authHeader = request.headers.authorization;
 
+        if (!authHeader) {
+            return response.status(401).send({ error: 'No token provided' });
+        }
+
         const [, token] = authHeader.split(' ');
 
         try {
