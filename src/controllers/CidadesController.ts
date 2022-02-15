@@ -14,7 +14,8 @@ export class CidadesController {
 
             return response.json(result)
         } catch (err) {
-            throw new Error(err)
+            console.log(err)
+            return response.status(502).send({ error: 'Falha no servidor' })
         }
     }
 
@@ -38,7 +39,8 @@ export class CidadesController {
 
             return response.json(result)
         } catch (err) {
-            throw new Error(err)
+            console.log(err)
+            return response.status(502).send({ error: 'Falha no servidor' })
         }
     }
 
@@ -57,19 +59,24 @@ export class CidadesController {
 
             return response.json(afterUpdate)
         } catch (err) {
-            throw new Error(err)
+            console.log(err)
+            return response.status(502).send({ error: 'Falha no servidor' })
         }
     }
 
     async destroy(request: Request, response: Response) {
         const { id_cidade } = request.params
+        try {
+            //@ts-ignore
+            const result = await Cidades.findByPk(id_cidade)
 
-        //@ts-ignore
-        const result = await Cidades.findByPk(id_cidade)
+            //@ts-ignore
+            await result.destroy(result)
 
-        //@ts-ignore
-        await result.destroy(result)
-
-        return response.json()
+            return response.json()
+        } catch (err) {
+            console.log(err)
+            return response.status(502).send({ error: 'Falha no servidor' })
+        }
     }
 }

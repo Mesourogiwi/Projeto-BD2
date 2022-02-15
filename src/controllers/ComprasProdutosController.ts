@@ -16,7 +16,8 @@ export class ComprasProdutosController {
 
             return response.json(result)
         } catch (err) {
-            throw new Error(err)
+            console.log(err)
+            return response.status(502).send({ error: 'Falha no servidor' })
         }
     }
 
@@ -32,7 +33,8 @@ export class ComprasProdutosController {
 
             return response.json(result)
         } catch (err) {
-            throw new Error(err)
+            console.log(err)
+            return response.status(502).send({ error: 'Falha no servidor' })
         }
     }
 
@@ -48,19 +50,25 @@ export class ComprasProdutosController {
 
             return response.json(afterUpdate)
         } catch (err) {
-            throw new Error(err)
+            console.log(err)
+            return response.status(502).send({ error: 'Falha no servidor' })
         }
     }
 
     async destroy(request: Request, response: Response) {
         const { id_compras_produtos } = request.params
 
-        //@ts-ignore
-        const result = await ComprasProdutos.findByPk(id_compras_produtos)
+        try {
+            //@ts-ignore
+            const result = await ComprasProdutos.findByPk(id_compras_produtos)
 
-        //@ts-ignore
-        await result.destroy(result)
+            //@ts-ignore
+            await result.destroy(result)
 
-        return response.json()
+            return response.json()
+        } catch (err) {
+            console.log(err)
+            return response.status(502).send({ error: 'Falha no servidor' })
+        }
     }
 }
