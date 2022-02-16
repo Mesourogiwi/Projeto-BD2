@@ -90,7 +90,7 @@ export class AuthController {
             response.send({ usuario, token })
         } catch (err) {
             console.log(err)
-            return response.status(502).send({ error: 'Falha no serviço' })
+            return response.status(502).send({ error: err, message: 'Erro no servidor' })
         }
     }
 }

@@ -37,7 +37,7 @@ export class ProdutosController {
         console.log(data.nome)
 
         try {
-            if (!data.nome || !data.descricao || !data.preco || !data.estoque || !data.categoria || !data.marca || !data.imposto) {
+            if (!data.nome || !data.descricao || !data.preco || !data.estoque || !data.categoria || !data.marca) {
                 return response.status(400).json('Preencha os campos')
             }
             data.imagem = request.file ? request.file.filename : undefined
