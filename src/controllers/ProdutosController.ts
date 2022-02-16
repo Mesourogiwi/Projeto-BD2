@@ -74,7 +74,7 @@ export class ProdutosController {
 
         try {
             //@ts-ignore
-            const result = await ComprasProdutos.findByPk(id_compras_produtos)
+            const result = await Produtos.findByPk(id_compras_produtos)
 
             //@ts-ignore
             await result.destroy(result)
