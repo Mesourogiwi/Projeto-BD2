@@ -20,6 +20,26 @@ export class ComprasController {
         }
     }
 
+    async indexByProduct(request: Request, response: Response) {
+        const { id_cliente } = request.params
+        try {
+            //@ts-ignore
+            const result = await Compras.findAll({
+                include: [
+                    { model: Usuarios }
+                ],
+                where: {
+                    cliente: id_cliente
+                }
+            });
+
+            return response.json(result)
+        } catch (err) {
+            console.log(err)
+            return response.status(502).send({ error: 'Falha no servidor' })
+        }
+    }
+
     async store(request: Request, response: Response) {
         const { cliente, total, comprasProdutos }: TypesCompras = request.body;
 

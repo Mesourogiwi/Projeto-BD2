@@ -346,6 +346,34 @@
                 }
             }
         },
+        "compras/{id_cliente}": {
+            "get": {
+                "summary": "Listagem de compras por usuário",
+                "tags": ["Compras"],
+                "parameters": {
+                    "in": "path",
+                    "name": "id_cliente",
+                    "required": true,
+                    "schema": {
+                        "type": "number"
+                    },
+                    "description": "ID do cliente que será buscado as compras"
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Compras"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/compras/{id_compra}": {
             "put": {
                 "summary": "Edição de compras",

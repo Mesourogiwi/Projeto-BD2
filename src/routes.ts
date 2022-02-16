@@ -33,6 +33,7 @@ routes.put('/usuarios/:id_usuario', ensuredAuthenticated(), new UsuariosControll
 routes.delete('/usuarios/:id_usuario', ensuredAuthenticated(), new UsuariosController().destroy)
 
 routes.get('/compras', new ComprasController().index)
+routes.get('/compras/:id_cliente', new ComprasController().indexByProduct)
 routes.post('/compras', new ComprasController().store)
 routes.put('/compras/:id_compra', new ComprasController().edit)
 routes.delete('/compras/:id_compra', ensureAdmin(), ensuredAuthenticated(), new ComprasController().destroy)
