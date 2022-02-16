@@ -58,7 +58,7 @@ export class ProdutosController {
         try {
             data.imagem = request.file ? request.file.filename : undefined
             //@ts-ignore
-            const result = await ComprasProdutos.findByPk(id_produto)
+            const result = await Produtos.findByPk(id_produto)
 
             const afterUpdate = await result.update(data)
 
