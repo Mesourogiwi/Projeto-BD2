@@ -11,9 +11,8 @@ export class Estados extends Model {
                     primaryKey: true,
                     autoIncrement: true
                 },
-                nome: DataTypes.STRING,
+                estado: DataTypes.STRING,
                 sigla: DataTypes.STRING,
-                senha: DataTypes.STRING
             },
             {
                 sequelize,
