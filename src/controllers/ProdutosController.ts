@@ -70,11 +70,11 @@ export class ProdutosController {
     }
 
     async destroy(request: Request, response: Response) {
-        const { id_compras_produtos } = request.params
+        const { id_produto } = request.params
 
         try {
             //@ts-ignore
-            const result = await Produtos.findByPk(id_compras_produtos)
+            const result = await Produtos.findByPk(id_produto)
 
             //@ts-ignore
             await result.destroy(result)
